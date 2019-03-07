@@ -1,5 +1,4 @@
 function findGroup() {
-    console.log('hello!')
     document.getElementsByClassName('homesections')[0].hidden = true;
     document.getElementsByClassName('findgroup')[0].hidden = false;
 }
@@ -13,6 +12,26 @@ function searchData(time) {
     return xmlHttp.responseText;
 }
 
+function createGroupList(groups) {
+    document.getElementsByClassName('group-form')[0].hidden = true;
+    document.getElementsByClassName('group-list')[0].hidden = false;
+    var parent = document.getElementsByClassName('group-list')[0];
+
+    groups.forEach(function(group) {
+        var item = document.createElement('input');
+        item.setAttribute('type', 'radio');
+        item.setAttribute('onclick', 'confirmGroup()');
+        var node = document.createTextNode(group.restaurant);
+        item.appendChild(node);
+        parent.appendChild(item);
+    });
+}
+
+function confirmGroup() {
+    document.getElementsByClassName('group-list')[0].hidden = true;
+    document.getElementsByClassName('confirmation')[0].hidden = false;
+}
+
 function searchGroups() {
     var inputs = document.forms[0].elements;
     var searchData = {};
@@ -22,5 +41,6 @@ function searchGroups() {
     searchData.time = inputs.time.value;
     console.log(searchData);
 
-    console.log(this.searchData(searchData.time));
+    var json = JSON.parse(this.searchData(searchData.time));
+    createGroupList(json.body);  
 }
