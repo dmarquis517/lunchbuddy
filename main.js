@@ -1,6 +1,8 @@
 function findGroup() {
     document.getElementsByClassName('homesections')[0].hidden = true;
     document.getElementsByClassName('findgroup')[0].hidden = false;
+    location.href = "#";
+    location.href = "#findgroup";
 }
 
 function searchData(time) {
