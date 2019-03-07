@@ -21,9 +21,16 @@ function createGroupList(groups) {
         var item = document.createElement('input');
         item.setAttribute('type', 'radio');
         item.setAttribute('onclick', 'confirmGroup()');
+        item.setAttribute('id', group.restaurant);
+        console.log(group.restaurant);
         var node = document.createTextNode(group.restaurant);
         item.appendChild(node);
+        var label = document.createElement('label');
+        label.setAttribute('for', group.restaurant);
+        var labelNode = document.createTextNode(group.restaurant);
+        label.appendChild(labelNode);
         parent.appendChild(item);
+        parent.appendChild(label);
     });
 }
 
@@ -39,8 +46,8 @@ function searchGroups() {
     searchData.firstName = inputs.firstname.value;
     searchData.lastName = inputs.lastname.value;
     searchData.time = inputs.time.value;
-    console.log(searchData);
 
     var json = JSON.parse(this.searchData(searchData.time));
+    console.log(json);
     createGroupList(json.body);  
 }
